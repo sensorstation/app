@@ -1,30 +1,19 @@
 <template>
-    <v-container>
-        <AppBar :links="links"></AppBar>
-
-        <v-row>
-
-            <v-col>
-                <HelloWorld msg="Welcome to Your Vue.js App"/>                
-            </v-col>
-
-        </v-row>
-
-        <Footer :links="links"></Footer>
+    <v-container class="home">
+	<v-row>
+	    <Dashboard msg="Welcome to Sensor Station"/>
+	</v-row>
     </v-container>
 </template>
 
 <script>
- import Footer from '@/components/Footer';
- import AppBar from '@/components/AppBar';
- import HelloWorld from '@/components/HelloWorld.vue'
+// @ is an alias to /src
+import Dashboard from '@/components/Dashboard.vue'
 
- export default {
-     name: 'Home',
-     components: {
-         Footer,
-         AppBar,
-         HelloWorld,
-     }
- }
+export default {
+  name: 'Home',
+  components: {
+    Dashboard
+  }
+}
 </script>
