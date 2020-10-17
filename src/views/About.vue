@@ -1,12 +1,12 @@
 <template>
-  <v-container fluid class="about">
+  <v-container class="about">
       <v-row>
 	  <v-col>
 	      <h1 class="text-center">Sensor stations is a collection of projects</h1>
 	  </v-col>
       </v-row>
 
-      <v-row dense>
+      <v-row>
 	  <v-col
 	      v-for="card in cards"
 	      :key="card.title"
