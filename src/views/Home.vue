@@ -10,10 +10,10 @@
 // @ is an alias to /src
 import Dashboard from '@/components/Dashboard.vue'
 
-export default {
-  name: 'Home',
-  components: {
-    Dashboard
-  }
-}
+ export default {
+     name: 'Home',
+     components: {
+         Dashboard
+     }
+ }
 </script>
