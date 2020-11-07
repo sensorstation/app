@@ -1,10 +1,18 @@
 <template>
     <v-container>
-        <v-row class="text-center">
-            <v-col cols="12">
-                <h1>{{ hour }}:{{ minute }}:{{ second }}</h1>
-                <h2>{{ month }}/{{ day }}/{{ year }}</h2>
+        <v-row>
+            <v-col></v-col>
+            <v-col cols="2">
+                <v-card class="text-center">
+                    <v-card-title>
+                        {{ hour }}:{{ minute }}:{{ second }}
+                    </v-card-title>
+                    <v-card-subtitle>
+                        {{ month }}/{{ day }}/{{ year }}
+                    </v-card-subtitle>
+                </v-card>
             </v-col>
+            <v-col></v-col>
         </v-row>
     </v-container>
 </template>
