@@ -1,19 +1,19 @@
 <template>
     <v-container class="home">
 	<v-row>
-	    <Dashboard msg="Welcome to Sensor Station"/>
+            <Clock />
 	</v-row>
     </v-container>
 </template>
 
 <script>
 // @ is an alias to /src
-import Dashboard from '@/components/Dashboard.vue'
+import Clock from '@/components/Clock.vue'
 
  export default {
      name: 'Home',
      components: {
-         Dashboard
+         Clock
      }
  }
 </script>
