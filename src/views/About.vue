@@ -1,23 +1,34 @@
 <template>
-  <v-container class="about">
-    <v-row>
-      <v-col>
-        <h1 class="text-center">Sensor stations is a collection of projects</h1>
-      </v-col>
-    </v-row>
+  <v-container>
+    <header class="my-6">
+      <h2 class="text-center">Sensor stations is a collection of projects</h2>
+    </header>
 
     <v-row>
       <v-col v-for="card in cards" :key="card.title" :cols="6">
-        <v-card :href="card.github">
+        <v-card rounded="lg" elevation="1">
           <v-card-title>
-            <span class="title font-weight-light">{{ card.title }}</span>
+            <div class="title">{{ card.title }}</div>
           </v-card-title>
-          <v-card-text>
+
+          <v-card-subtitle>
             {{ card.description }}
-          </v-card-text>
-          <v-card-text>
-            {{ card.github }}
-          </v-card-text>
+          </v-card-subtitle>
+
+          <v-card-actions>
+            <v-btn
+              v-if="!card.comingSoon"
+              color="primary"
+              text
+              :href="card.github"
+            >
+              View on Github
+            </v-btn>
+
+            <v-btn v-if="card.comingSoon" color="primary" text disabled
+              >Coming Soon</v-btn
+            >
+          </v-card-actions>
         </v-card>
       </v-col>
     </v-row>
@@ -36,19 +47,21 @@ export default {
         github: "https://github.com/sensorstation/esp32",
       },
       {
-        title: "Control Hub",
-        description: "Control Station",
-        github: "https://github.com/sensorstation/stub",
-      },
-      {
         title: "Dashboard",
         description: "That is me!",
         github: "https://github.com/sensorstation/app",
       },
       {
+        title: "Control Hub",
+        description: "Control Station",
+        github: "https://github.com/sensorstation/stub",
+        comingSoon: true,
+      },
+      {
         title: "Clowd Ops",
         description: "Clowd Operations",
         github: "https://github.com/sensorstation/stub",
+        comingSoon: true,
       },
     ],
   }),
