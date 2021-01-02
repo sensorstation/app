@@ -1,54 +1,47 @@
 <template>
-  <v-container>
-    <v-row>
-      <v-col></v-col>
-      <v-col cols="2">
-        <v-card class="text-center">
-          <v-card-title> {{ hour }}:{{ minute }}:{{ second }} </v-card-title>
-          <v-card-subtitle> {{ month }}/{{ day }}/{{ year }} </v-card-subtitle>
-        </v-card>
-      </v-col>
-      <v-col></v-col>
-    </v-row>
-  </v-container>
+  <div>
+    <div class="py-2 text-body-2">
+      <div>Server Time</div>
+      <div class="text--secondary">{{ date }} &ndash; {{ time }}</div>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
   name: "Clock",
   computed: {
-    year() {
-      return this.$store.state.time.time.year;
+    time() {
+      const { hour, minute, second } = this.$store.state.time.time;
+
+      const formattedHour = this.addZeroPrefix(hour);
+      const formattedMinute = this.addZeroPrefix(minute);
+      const formattedSecond = this.addZeroPrefix(second);
+
+      return `${formattedHour}:${formattedMinute}:${formattedSecond}`;
     },
-    month() {
-      return this.$store.state.time.time.month;
+    date() {
+      const { month, day, year } = this.$store.state.time.time;
+
+      const formattedMonth = this.addZeroPrefix(month);
+      const formattedDay = this.addZeroPrefix(day);
+      const formattedYear = this.addZeroPrefix(year);
+
+      return `${formattedMonth}/${formattedDay}/${formattedYear}`;
     },
-    day() {
-      return this.$store.state.time.time.day;
-    },
-    hour() {
-      return this.$store.state.time.time.hour;
-    },
-    minute() {
-      return this.$store.state.time.time.minute;
-    },
-    second() {
-      return this.$store.state.time.time.second;
-    },
-    timeStr() {
-      return this.$store.state.time.time;
+  },
+  methods: {
+    addZeroPrefix(value) {
+      if (!value) {
+        return "";
+      }
+
+      if (value > 9) {
+        return String(value);
+      }
+
+      return `0${value}`;
     },
   },
 };
 </script>
-
-<style :scoped>
-body {
-  background: black;
-}
-
-h1 {
-  font-size: 96px;
-  color: #2085a3;
-}
-</style>

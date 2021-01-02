@@ -1,19 +1,21 @@
 import Vue from "vue";
 import Vuex from "vuex";
 
-import * as websocket from "@/store/modules/websocket.js";
-import * as time from "@/store/modules/time.js";
-import * as quote from "@/store/modules/quote.js";
+import { time } from "@/store/modules/time.js";
+import { count } from "@/store/modules/count";
+import { websocket } from "@/store/modules/websocket.js";
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
   modules: {
-    websocket,
     time,
-    quote,
+    count,
+    websocket,
   },
   state: {},
   mutations: {},
   actions: {},
 });
+
+export default store;

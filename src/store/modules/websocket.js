@@ -1,31 +1,42 @@
-export const state = {
-  socket: {
+export const websocket = {
+  state: {
     isConnected: false,
-    message: {},
     reconnectError: false,
+    message: {},
+    sensors: {},
   },
-};
+  getters: {
+    getSensorData(state) {
+      return state.sensors;
+    },
+  },
+  mutations: {
+    SOCKET_ONOPEN(state) {
+      console.log("Socket is open.");
+      state.isConnected = true;
+    },
+    SOCKET_ONCLOSE(state) {
+      console.log("Socket is closed.");
+      state.isConnected = false;
+    },
+    SOCKET_ONERROR(state, event) {
+      console.error(state, event);
+    },
+    // default handler called for all methods
+    SOCKET_ONMESSAGE(state, message) {
+      state.message = message;
 
-export const mutations = {
-  SOCKET_ONOPEN(state) {
-    state.socket.isConnected = true;
-  },
-  SOCKET_ONCLOSE(state) {
-    state.socket.isConnected = false;
-  },
-  SOCKET_ONERROR(state, event) {
-    console.error(state, event);
-  },
-  // default handler called for all methods
-  SOCKET_ONMESSAGE(state, message) {
-    console.log(message);
-    state.socket.message = message;
-  },
-  // mutations for reconnect methods
-  SOCKET_RECONNECT(state, count) {
-    console.info(state, count);
-  },
-  SOCKET_RECONNECT_ERROR(state) {
-    state.socket.reconnectError = true;
+      state.sensors = {
+        ...state.sensors,
+        [message.K]: message.V,
+      };
+    },
+    // mutations for reconnect methods
+    SOCKET_RECONNECT(state, count) {
+      console.info(state, count);
+    },
+    SOCKET_RECONNECT_ERROR(state) {
+      state.reconnectError = true;
+    },
   },
 };

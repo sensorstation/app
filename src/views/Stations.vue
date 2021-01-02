@@ -3,24 +3,32 @@
     <v-row>
       <v-col col="12" sm="3">
         <v-sheet rounded="lg" elevation="1">
-          <div class="pa-1">
-            <v-list nav>
-              <v-list-item-group color="primary">
-                <v-list-item
-                  v-for="station in stations"
-                  :key="station.id"
-                  @click="selectStation(station)"
-                >
-                  <v-list-item-content>
-                    <v-list-item-title>{{ station.name }}</v-list-item-title>
-                    <v-list-item-subtitle>
-                      {{ station.id }}
-                    </v-list-item-subtitle>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list-item-group>
-            </v-list>
-          </div>
+          <template v-if="hasStations">
+            <div class="pa-1">
+              <v-list nav>
+                <div class="font-weight-bold text-lg text--secondary pl-2 pb-2">
+                  Station List
+                </div>
+
+                <v-list-item-group color="primary" mandatory>
+                  <v-list-item
+                    v-for="station in stations"
+                    :key="station.id"
+                    @click="selectStation(station)"
+                  >
+                    <v-list-item-content>
+                      <v-list-item-title :title="station.name">
+                        {{ station.name }}
+                      </v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
+                </v-list-item-group>
+              </v-list>
+            </div>
+          </template>
+          <template v-else>
+            <div class="pa-3">No stations available</div>
+          </template>
         </v-sheet>
       </v-col>
 
@@ -33,11 +41,11 @@
           </v-row>
 
           <v-row>
-            <v-col v-for="sensor in sensors" :key="sensor.title" :cols="4">
+            <v-col v-for="(key, value) in sensors" :key="key" :cols="4">
               <v-card rounded="lg" outlined>
-                <v-card-title>{{ sensor.key }}</v-card-title>
+                <v-card-title>{{ key }}</v-card-title>
                 <v-card-text>
-                  {{ sensor.value }}
+                  {{ value }}
                 </v-card-text>
               </v-card>
             </v-col>
@@ -51,42 +59,25 @@
 <script>
 export default {
   name: "Stations",
+  created() {
+    this.selectStation(this.stations[0] || {});
+  },
+  computed: {
+    hasStations() {
+      return this.stations.length > 0;
+    },
+    sensors() {
+      return this.$store.getters.getSensorData;
+    },
+  },
   data() {
     return {
       selectedStation: "",
-      stations: [
-        {
-          id: "lettuce-station-backyard",
-          name: "Lettuces",
-        },
-        {
-          id: "tomatoes",
-          name: "Tomatoes",
-        },
-      ],
-      sensors: [
-        {
-          key: "tempf",
-          value: 88,
-        },
-        {
-          key: "humid",
-          value: 0.12,
-        },
-        {
-          key: "soil",
-          value: 0.49,
-        },
-        {
-          key: "light",
-          value: 0.62,
-        },
-      ],
+      stations: [{ id: "default", name: "Default Station" }],
     };
   },
   methods: {
     selectStation(station) {
-      console.log("selected station:", station);
       this.selectedStation = station;
     },
   },

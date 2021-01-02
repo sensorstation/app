@@ -8,7 +8,7 @@
 
         <v-btn
           v-for="link in links"
-          :key="link"
+          :key="link.title"
           :to="link.url"
           text
           class="ml-2"
@@ -22,18 +22,25 @@
       <router-view></router-view>
     </v-main>
 
-    <v-footer app></v-footer>
+    <v-footer app>
+      <Clock />
+    </v-footer>
   </v-app>
 </template>
 
 <script>
+import Clock from "@/components/Clock";
+
 export default {
   name: "App",
+  components: {
+    Clock,
+  },
   data: () => ({
     links: [
-      { title: "Stations", icon: "mdi-network-outline", url: "/stations" },
-      { title: "Settings", icon: "mdi-cog-outline", url: "/settings" },
-      { title: "About", icon: "mdi-information-outline", url: "/about" },
+      { title: "Stations", url: "/stations" },
+      { title: "Settings", url: "/settings" },
+      { title: "About", url: "/about" },
     ],
   }),
 };
