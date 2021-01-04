@@ -23,7 +23,9 @@
     </v-main>
 
     <v-footer app>
-      <Clock />
+      <v-container>
+        <Clock />
+      </v-container>
     </v-footer>
   </v-app>
 </template>

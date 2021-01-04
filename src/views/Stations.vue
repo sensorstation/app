@@ -36,18 +36,13 @@
         <v-sheet rounded="lg" class="px-4 py-2" elevation="1">
           <v-row>
             <v-col>
-              <h2>{{ selectedStation.name }}</h2>
+              <h2>{{ selectedStation.name }} Sensors</h2>
             </v-col>
           </v-row>
 
           <v-row>
-            <v-col v-for="(key, value) in sensors" :key="key" :cols="4">
-              <v-card rounded="lg" outlined>
-                <v-card-title>{{ key }}</v-card-title>
-                <v-card-text>
-                  {{ value }}
-                </v-card-text>
-              </v-card>
+            <v-col v-for="(value, key) in sensors" :key="key" :cols="4">
+              <SensorData :key="key" :name="key" :value="value" />
             </v-col>
           </v-row>
         </v-sheet>
@@ -57,8 +52,13 @@
 </template>
 
 <script>
+import SensorData from "@/components/sensor-data-card/sensor-data-card";
+
 export default {
   name: "Stations",
+  components: {
+    SensorData,
+  },
   created() {
     this.selectStation(this.stations[0] || {});
   },

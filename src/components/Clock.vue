@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="py-2 text-body-2">
-      <div>Server Time</div>
+      <div>Server time</div>
       <div class="text--secondary">{{ date }} &ndash; {{ time }}</div>
     </div>
   </div>
@@ -33,7 +33,7 @@ export default {
   methods: {
     addZeroPrefix(value) {
       if (!value) {
-        return "";
+        return "00";
       }
 
       if (value > 9) {
