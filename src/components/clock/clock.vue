@@ -9,7 +9,6 @@
 
 <script>
 export default {
-  name: "Clock",
   computed: {
     time() {
       const { hour, minute, second } = this.$store.state.time.time;

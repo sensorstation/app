@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import Clock from "@/components/Clock";
+import Clock from "@/components/clock/clock";
 
 export default {
   name: "App",
