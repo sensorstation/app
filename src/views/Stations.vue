@@ -3,32 +3,7 @@
     <v-row>
       <v-col col="12" sm="3">
         <v-sheet rounded="lg" elevation="1">
-          <template v-if="hasStations">
-            <div class="pa-1">
-              <v-list nav>
-                <div class="font-weight-bold text-lg text--secondary pl-2 pb-2">
-                  Station List
-                </div>
-
-                <v-list-item-group color="primary" mandatory>
-                  <v-list-item
-                    v-for="station in stations"
-                    :key="station.id"
-                    @click="selectStation(station)"
-                  >
-                    <v-list-item-content>
-                      <v-list-item-title :title="station.name">
-                        {{ station.name }}
-                      </v-list-item-title>
-                    </v-list-item-content>
-                  </v-list-item>
-                </v-list-item-group>
-              </v-list>
-            </div>
-          </template>
-          <template v-else>
-            <div class="pa-3">No stations available</div>
-          </template>
+          <station-list :stations="stations" />
         </v-sheet>
       </v-col>
 
@@ -53,19 +28,18 @@
 
 <script>
 import SensorData from "@/components/sensor-data-card/sensor-data-card";
+import StationList from "@/components/station-list/station-list";
 
 export default {
   name: "Stations",
   components: {
     SensorData,
+    StationList,
   },
   created() {
     this.selectStation(this.stations[0] || {});
   },
   computed: {
-    hasStations() {
-      return this.stations.length > 0;
-    },
     sensors() {
       return this.$store.getters.getSensorData;
     },
