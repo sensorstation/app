@@ -1,78 +1,59 @@
 <template>
-    <v-container fluid class="stations">
-	<v-row>
-	    <v-col
-		v-for="station in stations"
-		       :key="station.title"
-		       :cols="4"
-	    >
-		<v-card>
-		    <v-row>
-			<v-col>
-			    <v-card-title>{{ station.location }}</v-card-title>
-			    <v-card-subtitle>{{ station.name }}</v-card-subtitle>
-			</v-col>
-			<v-col>
-			    <h1>{{station.soil}} %</h1>
-			    <h6>Soil Moisture</h6>
-			</v-col>
-		    </v-row>
-		</v-card>
-	    </v-col>
-	</v-row>
-    </v-container>
+  <v-container>
+    <v-row>
+      <v-col col="12" sm="3">
+        <v-sheet rounded="lg" elevation="1">
+          <station-list :stations="stations" />
+        </v-sheet>
+      </v-col>
+
+      <v-col col="12" sm="9">
+        <v-sheet rounded="lg" class="px-4 py-2" elevation="1">
+          <v-row>
+            <v-col>
+              <h2>{{ selectedStation.name }} Sensors</h2>
+            </v-col>
+          </v-row>
+
+          <v-row>
+            <v-col v-for="(value, key) in sensors" :key="key" :cols="4">
+              <SensorData :key="key" :name="key" :value="value" />
+            </v-col>
+          </v-row>
+        </v-sheet>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
- export default {
-     name: 'Stations',
-     data: () => ({
-	 title: "Sensor Network",
-	 stations: [
-	     {
-		 name: "station-01",
-		 location: "Tomatoes",
-		 tempf: 77.1,
-		 soil: 12.1,
-		 battery: "battery-charging-wireless-50",
-	     },
-	     {
-		 name: "station-02",
-		 location: "Succulents",
-		 tempf: 77.8,
-		 soil: 9.8,
-		 battery: "battery-charging-wireless-50",
-	     },
-	     {
-		 name: "station-03",
-		 location: "Corn",
-		 tempf: 88.8,
-		 soil: 11.1,
-		 battery: "battery-charging-wireless-50",
-	     },
-	     {
-		 name: "station-04",
-		 location: "Egg Plant",
-		 tempf: 78.8,
-		 soil: 18.1,
-		 battery: "battery-charging-wireless-50",
-	     },
-	     {
-		 name: "station-05",
-		 location: "Squash",
-		 tempf: 72.8,
-		 soil: 14.1,
-		 battery: "battery-charging-wireless-50",
-	     },
-	     {
-		 name: "station-06",
-		 location: "Plantiens",
-		 tempf: 77.8,
-		 soil: 32.1,
-		 battery: "battery-charging-wireless-50",		 
-	     }
-	 ],
+import SensorData from "@/components/sensor-data-card/sensor-data-card";
+import StationList from "@/components/station-list/station-list";
 
-     })
- }
+export default {
+  name: "Stations",
+  components: {
+    SensorData,
+    StationList,
+  },
+  created() {
+    this.selectStation(this.stations[0] || {});
+  },
+  computed: {
+    sensors() {
+      return this.$store.getters.getSensorData;
+    },
+  },
+  data() {
+    return {
+      selectedStation: "",
+      stations: [{ id: "default", name: "Default Station" }],
+    };
+  },
+  methods: {
+    selectStation(station) {
+      this.selectedStation = station;
+    },
+  },
+};
 </script>
