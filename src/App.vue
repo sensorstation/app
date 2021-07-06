@@ -2,7 +2,7 @@
   <v-app id="sensorstation">
     <v-app-bar app color="white" flat>
       <v-container class="py-0 fill-height">
-        <h2>Sensor Station</h2>
+        <h2>RedEye IVN</h2>
 
         <v-spacer></v-spacer>
 
@@ -40,6 +40,7 @@ export default {
   },
   data: () => ({
     links: [
+      { title: "Cameras", url: "/cameras" },
       { title: "Stations", url: "/stations" },
       { title: "Settings", url: "/settings" },
       { title: "About", url: "/about" },

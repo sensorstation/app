@@ -22,10 +22,10 @@ export const websocket = {
     SOCKET_ONERROR(state, event) {
       console.error(state, event);
     },
+
     // default handler called for all methods
     SOCKET_ONMESSAGE(state, message) {
       state.message = message;
-
       state.sensors = {
         ...state.sensors,
         [message.K]: message.V,

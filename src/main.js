@@ -5,7 +5,8 @@ import store from "./store";
 import vuetify from "./plugins/vuetify";
 import VueNativeSock from "vue-native-websocket";
 
-Vue.use(VueNativeSock, `ws://${process.env.VUE_APP_WEBSOCKET_API_URL}/ws`, {
+//Vue.use(VueNativeSock, `ws://${process.env.VUE_APP_WEBSOCKET_API_URL}/ws`, {
+Vue.use(VueNativeSock, `ws://10.24.10.10:8080/ws`, {
   store: store,
   format: "json",
   reconnection: true,
