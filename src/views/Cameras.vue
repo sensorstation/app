@@ -16,10 +16,8 @@
           </v-row>
 
           <v-row>
-            <v-col v-for="(value, key) in cameras" :key="key" :cols="4">
-              {{ value }} - {{ key }}
-              <CameraData :key="name" :name="name" :value="addr" />
-            </v-col>
+            <h3>Cameras From Hub</h3>
+            {{ getCameras }}
           </v-row>
         </v-sheet>
       </v-col>
@@ -28,13 +26,11 @@
 </template>
 
 <script>
-import CameraData from "@/components/camera-data-card/camera-data-card";
 import CameraList from "@/components/camera-list/camera-list";
 
 export default {
   name: "Cameras",
   components: {
-    CameraData,
     CameraList,
   },
   data() {
