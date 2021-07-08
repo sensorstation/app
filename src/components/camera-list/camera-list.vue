@@ -10,12 +10,13 @@
           <v-list-item-group color="primary" mandatory>
             <v-list-item
               v-for="camera in getCameras"
-              :key="camera.id"
+              :key="camera.name"
               @click="selectCamera(camera)"
             >
+              Camera {{ camera[0].name }}
               <v-list-item-content>
                 <v-list-item-title :title="camera.name">
-                  {{ camera.name }}
+                  {{ camera.addr }}
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
@@ -32,18 +33,12 @@
 
 <script>
 export default {
-  props: {
-    cameras: {
-      name: String,
-      id: String,
-    },
-  },
   computed: {
     hasCameras() {
-      return this.cameras.length > 0;
+      return 1;
     },
     getCameras() {
-      return this.cameras;
+      return this.$store.getters.getCameras;
     },
   },
 };

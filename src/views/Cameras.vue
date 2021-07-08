@@ -17,7 +17,8 @@
 
           <v-row>
             <v-col v-for="(value, key) in cameras" :key="key" :cols="4">
-              <CameraData :key="key" :name="key" :value="value" />
+              {{ value }} - {{ key }}
+              <CameraData :key="name" :name="name" :value="addr" />
             </v-col>
           </v-row>
         </v-sheet>
@@ -39,11 +40,15 @@ export default {
   data() {
     return {
       selectedCamera: "",
-      cameras: [{ id: "default", name: "Default Camera" }],
+      cameras: this.$store.getters.getCameras,
     };
   },
   created() {
-    this.selectCamera(this.cameras[0] || {});
+    if (this.cameras[0]) {
+      this.selectedCamera = this.cameras[0];
+    } else {
+      this.selectedCamera = {};
+    }
   },
 
   computed: {
