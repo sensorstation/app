@@ -41,5 +41,10 @@ export default {
       return this.$store.getters.getCameras;
     },
   },
+  methods: {
+    selectCamera(cam) {
+      this.$store.dispatch("selectCamera", cam);
+    },
+  },
 };
 </script>

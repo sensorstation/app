@@ -11,13 +11,12 @@
         <v-sheet rounded="lg" class="px-4 py-2" elevation="1">
           <v-row>
             <v-col>
-              <h2>{{ selectedCamera.name }} Cameras</h2>
+              <h2>Camera: {{ selectedCamera.name }}</h2>
             </v-col>
           </v-row>
 
           <v-row>
-            <h3>Cameras From Hub</h3>
-            {{ getCameras }}
+            {{ selectedCamera }}
           </v-row>
         </v-sheet>
       </v-col>
@@ -35,7 +34,6 @@ export default {
   },
   data() {
     return {
-      selectedCamera: "",
       cameras: this.$store.getters.getCameras,
     };
   },
@@ -50,6 +48,9 @@ export default {
   computed: {
     getCameras() {
       return this.$store.getters.getCameras;
+    },
+    selectedCamera() {
+      return this.$store.getters.selectedCamera;
     },
   },
   methods: {
