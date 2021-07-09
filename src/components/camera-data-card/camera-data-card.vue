@@ -8,6 +8,9 @@
     <v-card-text>
       <p><b>URL:</b>{{ getURL() }}</p>
       <div>
+        <img id="image" width="640" height="480" />
+        <canvas id="canvas" width="640" heigth="480"></canvas>
+
         {{ playVideo() }}
       </div>
     </v-card-text>
@@ -50,17 +53,6 @@ export default {
           let imageBuffer = null;
           let bytesRead = 0;
 
-          const getLength = (headers) => {
-            let contentLength = -1;
-            headers.split("\n").forEach((header, _) => {
-              const pair = header.split(":");
-              if (pair[0] === CONTENT_LENGTH) {
-                contentLength = pair[1];
-              }
-            });
-            return contentLength;
-          };
-
           // calculating fps. This is pretty lame. Should probably implement a floating window function.
           let frames = 0;
 
@@ -68,6 +60,25 @@ export default {
             console.log("fps : " + frames);
             frames = 0;
           }, 1000);
+
+          const getLength = (headers) => {
+            let contentLength = -1;
+            headers.split("\n").forEach((header, _) => {
+              const pair = header.split(":");
+              /* if (pair[0] === CONTENT_LENGTH) {
+               *     contentLength = pair[1];
+               * } */
+              console.log("pair 0");
+              console.log(pair[0]);
+              if (pair[0] == "Content-Length") {
+                console.log("CONTENET LENGTH!");
+                contentLength = pair[1];
+              }
+            });
+            console.log("return content length: ");
+            console.log(headers);
+            return contentLength;
+          };
 
           const read = () => {
             reader
@@ -83,7 +94,11 @@ export default {
                   if (value[index] === SOI[0] && value[index + 1] === SOI[1]) {
                     // console.log('header found : ' + newHeader);
                     contentLength = getLength(headers);
+
                     // console.log("Content Length : " + newContentLength);
+                    console.log("Content-length: ");
+                    console.log(contentLength);
+
                     imageBuffer = new Uint8Array(
                       new ArrayBuffer(contentLength)
                     );
