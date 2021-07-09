@@ -13,7 +13,6 @@
               :key="camera.name"
               @click="selectCamera(camera)"
             >
-              Camera {{ camera[0].name }}
               <v-list-item-content>
                 <v-list-item-title :title="camera.name">
                   {{ camera.addr }}
@@ -35,7 +34,8 @@
 export default {
   computed: {
     hasCameras() {
-      return 1;
+      let c = this.$store.getters.getCameras;
+      return c.length;
     },
     getCameras() {
       return this.$store.getters.getCameras;

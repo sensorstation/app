@@ -8,13 +8,13 @@ export const cameras = {
     },
   },
   mutations: {
-    setCameras(state, payload) {
-      state.cameras = payload;
+    setCameras(state, cams) {
+      state.cameras = cams;
     },
   },
   actions: {
     setCameras(context, payload) {
-      context.commit("setCameras", payload);
+      context.commit("setCameras", payload.cameras);
     },
   },
 };
