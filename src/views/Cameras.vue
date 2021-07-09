@@ -11,12 +11,8 @@
         <v-sheet rounded="lg" class="px-4 py-2" elevation="1">
           <v-row>
             <v-col>
-              <h2>Camera: {{ selectedCamera.name }}</h2>
+              <camera-data :camera="selectedCamera" />
             </v-col>
-          </v-row>
-
-          <v-row>
-            {{ selectedCamera }}
           </v-row>
         </v-sheet>
       </v-col>
@@ -26,24 +22,19 @@
 
 <script>
 import CameraList from "@/components/camera-list/camera-list";
-
+import CameraData from "@/components/camera-data-card/camera-data-card";
 export default {
   name: "Cameras",
   components: {
     CameraList,
+    CameraData,
   },
   data() {
     return {
       cameras: this.$store.getters.getCameras,
     };
   },
-  created() {
-    if (this.cameras[0]) {
-      this.selectedCamera = this.cameras[0];
-    } else {
-      this.selectedCamera = {};
-    }
-  },
+  created() {},
 
   computed: {
     getCameras() {
@@ -51,11 +42,6 @@ export default {
     },
     selectedCamera() {
       return this.$store.getters.selectedCamera;
-    },
-  },
-  methods: {
-    selectCamera(camera) {
-      this.selectedCamera = camera;
     },
   },
 };

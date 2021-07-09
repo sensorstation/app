@@ -1,7 +1,7 @@
 export const cameras = {
   state: {
     cameras: {},
-    selectedCamera: "",
+    selectedCamera: {},
   },
   getters: {
     getCameras(state) {
